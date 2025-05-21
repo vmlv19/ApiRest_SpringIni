@@ -5,9 +5,7 @@ import com.trainibit.labs.bookfinder.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +22,15 @@ public class BookController {
     public List<Book> getBooks() {
         logger.info("Get all Books");
         return bookService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Book getBookById(@PathVariable int id) {
+        return bookService.getById(id);
+    }
+
+    @PostMapping
+    public Book createBook(@RequestBody Book book) {
+        return bookService.save(book);
     }
 }
